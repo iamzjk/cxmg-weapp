@@ -1,0 +1,6 @@
+<!--pages/tracking/tracking.wxml-->
+<view class="page">
+  <view class="page__bd" wx:for="{{statuses}}" wx:for-item="status">
+    <text>{{ status.time }} {{status.status}} {{status.reporter}}</text>
+  </view>
+</view>
