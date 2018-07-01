@@ -1,10 +1,12 @@
 // pages/tracking/tracking.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    hidden: false,
     tracking: '',
     carrier: '',
     statuses: []
@@ -19,10 +21,10 @@ Page({
       tracking: options.tracking,
       carrier: options.carrier
     })
-    console.log(options.tracking)
-    console.log(options.carrier)
+    // console.log(options.tracking)
+    // console.log(options.carrier)
     wx.request({
-      url: 'http://127.0.0.1:5000/api/tracking',
+      url: 'https://www.nbyujin.com/cxmg/api/tracking',
       method: 'POST',
       data: {
         tracking_number: options.tracking,
@@ -30,12 +32,13 @@ Page({
       },
       header: {
         'content-type': 'application/json',
-        'X-Token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImplbGZzb255IiwiZXhwIjoxNTI2OTI4OTc2fQ.Mu1Il3zX1nkVPvCyXyGf3Nr9TrhsGWF9yi7nMLsVWow'
+        'X-Token': "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImplbGZzb255IiwiZXhwIjo0MTIwNTc4Nzc2fQ.jSPTJTFMBsagyDhfr7IEEOhH47Ijk63DIhPxL6HbKLU"
       },
       success: function (res) {
-        console.log(res.data)
+        // console.log(res.data)
         that.setData({
-          statuses: res.data.data.statuses
+          statuses: res.data.data.statuses,
+          hidden: true
         })
       }
     })

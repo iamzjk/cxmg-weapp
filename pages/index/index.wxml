@@ -1,13 +1,41 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+    <view class="page__hd">
+        <view class="page__title">橙昕美购</view>
+        <view class="page__desc">订单和快递查询</view>
+    </view>
+    <view class="page__bd">
+        <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{topTipMsg}}</view>
+
+        <!--
+        <view class="weui-cells__title">订单和快递查询</view>
+        -->
+        <form bindsubmit='showTopTips' bindreset='resetForm'>
+          <view class="weui-cells weui-cells_after-title">
+              <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                      <view class="weui-label">收件人</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                      <input name="client" class="weui-input" placeholder="请输入姓名" bindchange="bindClientChange"/>
+                  </view>
+              </view>
+              <view class="weui-cell weui-cell_input weui-cell_vcode">
+                  <view class="weui-cell__hd">
+                      <view class="weui-label">手机号</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                      <input type="number" name="phone" class="weui-input" placeholder="请输入手机号" bindchange="bindPhoneChange"/>
+                  </view>
+              </view>
+          </view>
+          <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" form-type="submit">查询</button>
+            <button class="weui-btn" form-type="reset">重置</button> 
+          </view>
+        </form>
+    </view>
+    <view class="page__ft">
+        <view class="weui-cells__tips">掌柜微信 jelfsony</view>
+    </view>
 </view>

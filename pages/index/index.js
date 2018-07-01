@@ -4,51 +4,66 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    showTopTips: false,
+    client: "",
+    phone: "",
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
+  //提交表单函数
+  showTopTips: function(e){
+
+    const client = e.detail.value.client.trim()
+    const phone = e.detail.value.phone.trim()
+
+    //手机号验证
+    const phoneReg = /^1[0-9]{10}$/
+    const isPhoneValid = phoneReg.test(phone)
+
+    var that = this;
+    if (!client || !phone) {
       this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
+        showTopTips: true,
+        topTipMsg: '收件人或手机号不能为空'
+      });
+      setTimeout(function () {
+        that.setData({
+          showTopTips: false
+        });
+      }, 3000);
+    } else if (!isPhoneValid) {
+      //手机号验证
+      this.setData({
+        showTopTips: true,
+        topTipMsg: '手机号不对'
+      });
+      setTimeout(function () {
+        that.setData({
+          showTopTips: false
+        });
+      }, 3000);
     } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
+      const url = `../orders/orders?client=${e.detail.value.client.trim()}&phone=${e.detail.value.phone.trim()}`
+      wx.navigateTo({
+        url: url
       })
     }
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+  //重置表单数据函数
+  resetForm: function () {
     this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+      client: '',
+      phone: '',
     })
-  }
+  },
+  bindClientChange: function (e) {
+    // console.log('setting client value:', e.detail.value)
+    this.setData({
+      client: e.detail.value.trim()
+    })
+  },
+  bindPhoneChange: function (e) {
+    // console.log('setting phone value:', e.detail.value)
+    this.setData({
+        phone: e.detail.value.trim()
+    })
+  },
 })

@@ -1,0 +1,39 @@
+<view class="page">
+    <loading hidden="{{hidden}}">
+        加载中...
+    </loading>
+    <view class="page__bd">
+        <view class="weui-panel weui-panel_access"  wx:for="{{orders}}" wx:key="orderId" wx:for-item="order">
+            <view class="weui-panel__hd">{{ order.node.createdTime }}</view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__title weui-media-box__title_in-text">
+                        <span>{{ order.node.product }}</span>
+                        <span style="float: right;">￥{{ order.node.price }}</span>
+                    </view>
+                    <view class="weui-media-box__info">
+                        <view class="weui-media-box__info__meta">数量 {{ order.node.quantity}}</view>
+                        <view class="weui-media-box__info__meta">
+                            <view wx:if="{{order.node.tracking != ''}}">快递单号 {{order.node.tracking}} </view>
+                            <view wx:else>未发货</view>
+                        </view>
+                        <view wx:if="{{order.node.tracking != ''}}" class="weui-media-box__info__meta weui-media-box__info__meta_extra">
+                            <navigator url="../tracking/tracking?carrier={{order.node.carrier}}&tracking={{order.node.tracking}}" hover-class="weui-cell_active">
+                            查看快递
+                            </navigator>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <!-- show more orders div
+        <view class="weui-panel__ft">
+            <view class="weui-cell weui-cell_access weui-cell_link">
+                <view class="weui-cell__bd">查看更多</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+        </view>
+        -->
+    </view>
+</view>

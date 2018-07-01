@@ -1,6 +1,16 @@
 <!--pages/tracking/tracking.wxml-->
 <view class="page">
-  <view class="page__bd" wx:for="{{statuses}}" wx:for-item="status">
-    <text>{{ status.time }} {{status.status}} {{status.reporter}}</text>
-  </view>
+    <loading hidden="{{hidden}}">
+      正在追踪包裹...
+    </loading>
+    <view class="page__bd">
+      <view wx:for="{{statuses}}" wx:for-item="status" wx:key="{{status.time}}">
+        <view class="weui-cells__title">{{status.time}}</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">{{status.status}}</view>
+            </view>
+        </view>
+      </view>
+    </view>
 </view>
