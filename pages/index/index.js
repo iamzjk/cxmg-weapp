@@ -8,9 +8,14 @@ Page({
     client: "",
     phone: "",
   },
+  onShow: function(){
+    this.setData({
+      searches: wx.getStorageSync('searches')
+    })
+    console.log(wx.getStorageSync('searches'))
+  },
   //提交表单函数
   showTopTips: function(e){
-
     const client = e.detail.value.client.trim()
     const phone = e.detail.value.phone.trim()
 
@@ -20,6 +25,7 @@ Page({
 
     var that = this;
     if (!client || !phone) {
+      //验证输入
       this.setData({
         showTopTips: true,
         topTipMsg: '收件人或手机号不能为空'
@@ -41,6 +47,31 @@ Page({
         });
       }, 3000);
     } else {
+      //验证通过后保存查询记录
+      const newSearch = {
+        client: client,
+        phone: phone,
+      }
+      wx.getStorage({
+        key: 'searches',
+        success: function(res) {
+          var searches = res.data
+          if (!(searches.some((obj) => obj.client == client && obj.phone == phone))) {
+            searches.unshift(newSearch)
+            wx.setStorage({
+              key: 'searches',
+              data: searches.slice(0, 3)
+            })
+          }
+        },
+        fail: function() {
+          wx.setStorage({
+            key: 'searches',
+            data: [newSearch]
+          })
+        }
+      })
+
       const url = `../orders/orders?client=${e.detail.value.client.trim()}&phone=${e.detail.value.phone.trim()}`
       wx.navigateTo({
         url: url

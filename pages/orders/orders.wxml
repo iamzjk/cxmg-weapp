@@ -2,6 +2,10 @@
     <loading hidden="{{hidden}}">
         加载中...
     </loading>
+    <view class="page__hd">
+        <view class="page__title">{{client}}</view>
+        <view class="page__desc">{{phone}}</view>
+    </view>
     <view class="page__bd">
         <view class="weui-panel weui-panel_access"  wx:for="{{orders}}" wx:key="orderId" wx:for-item="order">
             <view class="weui-panel__hd">{{ order.node.createdTime }}</view>

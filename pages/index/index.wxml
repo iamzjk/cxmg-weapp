@@ -34,6 +34,19 @@
             <button class="weui-btn" form-type="reset">重置</button> 
           </view>
         </form>
+      <view><text>\n</text></view>
+      <view wx:if="{{searches}}">
+        <view class="weui-cells__title">最近3次查询纪录</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view wx:for="{{searches}}" wx:key="{{client}}" wx:for-item="search">
+            <navigator url="../orders/orders?client={{search.client}}&phone={{search.phone}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__bd">{{search.client}} {{search.phone}}</view>
+              <view class="weui-cell__ft weui-cell__ft_in-access">查询</view>
+            </navigator>
+            <view class="divLine"></view>
+          </view>
+        </view>
+      </view>
     </view>
     <view class="page__ft">
         <view class="weui-cells__tips">掌柜微信 jelfsony</view>
