@@ -97,4 +97,12 @@ Page({
         phone: e.detail.value.trim()
     })
   },
+  // remove research history
+  removeSearches: function () {
+    wx.setStorage({
+      key: 'searches',
+      data: [],
+      success: function(res) {},
+    })
+  }
 })

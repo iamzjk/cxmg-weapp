@@ -19,11 +19,11 @@
                         <view class="weui-media-box__info__meta">数量 {{ order.node.quantity}}</view>
                         <view class="weui-media-box__info__meta">
                             <view wx:if="{{order.node.tracking != ''}}">快递单号 {{order.node.tracking}} </view>
-                            <view wx:else>未发货</view>
+                            <view wx:else><span style="color: red;">未发货</span></view>
                         </view>
                         <view wx:if="{{order.node.tracking != ''}}" class="weui-media-box__info__meta weui-media-box__info__meta_extra">
                             <navigator url="../tracking/tracking?carrier={{order.node.carrier}}&tracking={{order.node.tracking}}" hover-class="weui-cell_active">
-                            查看快递
+                              <span style='color: green; text-decoration: underline;'>查看快递</span>
                             </navigator>
                         </view>
                     </view>
