@@ -27,6 +27,16 @@
                             </navigator>
                         </view>
                     </view>
+                    <view wx:if="{{order.node.forwardTracking != ''}}" class="weui-media-box__info">
+                        <view class="weui-media-box__info__meta">
+                            <view>拼单国内转运 {{order.node.forwardCarrier}} {{order.node.forwardTracking}} </view>
+                        </view>
+                        <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">
+                            <navigator url="../tracking/tracking?carrier={{order.node.forwardCarrier}}&tracking={{order.node.forwardTracking}}" hover-class="weui-cell_active">
+                              <span style='color: green; text-decoration: underline;'>查看转运</span>
+                            </navigator>
+                        </view>
+                    </view>
                 </view>
             </view>
         </view>
