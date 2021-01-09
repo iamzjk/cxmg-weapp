@@ -9,6 +9,7 @@
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
                 <view class="weui-cell__bd">{{status.status}}</view>
+                <view class="weui-cell__ft" bindtap="copyToClipBoard" data-text="{{status.status}}">复制</view>
             </view>
         </view>
       </view>

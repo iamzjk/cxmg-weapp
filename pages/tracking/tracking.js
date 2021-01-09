@@ -11,6 +11,23 @@ Page({
     carrier: '',
     statuses: []
   },
+  copyToClipBoard: function (e) {
+    // console.log(e)
+    wx.setClipboardData({
+      data: e.currentTarget.dataset.text,
+      // // success default behavior
+      // success: function (res) {
+      //   wx.getClipboardData({
+      //     success: function (res) {
+      //       wx.showToast({
+      //         title: '内容已复制'
+      //       })
+      //     }
+      //   })
+      // }
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面加载
